@@ -4,6 +4,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import tachiyomi.core.common.platform.getPlatformName
+import tachiyomi.core.common.platform.getPlatformType
+import tachiyomi.core.common.platform.createFileSystem
+import tachiyomi.core.common.Constants
 
 /**
  * Main application composable for Anikku Desktop.
@@ -73,13 +77,19 @@ fun DesktopApp() {
 
                 Spacer(modifier = Modifier.height(32.dp))
 
-                // Platform info
+                // Platform info using core/common utilities
+                val fileSystem = remember { createFileSystem() }
+                
                 Text(
                     text = buildString {
-                        append("Platform: ${System.getProperty("os.name")}\n")
+                        append("Platform: ${getPlatformName()}\n")
+                        append("Platform Type: ${getPlatformType()}\n")
                         append("Architecture: ${System.getProperty("os.arch")}\n")
                         append("Java: ${System.getProperty("java.version")}\n")
-                        append("User: ${System.getProperty("user.home")}")
+                        append("\nCore/Common Integration:\n")
+                        append("App Data: ${fileSystem.getAppDataDir()}\n")
+                        append("Cache: ${fileSystem.getCacheDir()}\n")
+                        append("Downloads: ${fileSystem.getDownloadsDir()}\n")
                     },
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant

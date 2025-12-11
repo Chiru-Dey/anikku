@@ -7,7 +7,7 @@ Track overall progress across all 12 sessions.
 ## Session Progress
 
 - [x] **Session 1**: Foundation & Strategy (100%)
-- [ ] **Session 2**: Core Infrastructure & Build System (0%)
+- [x] **Session 2**: Core Infrastructure & Build System (95% - awaiting build verification)
 - [ ] **Session 3**: Domain Layer Migration (0%)
 - [ ] **Session 4**: Data Layer & Database (0%)
 - [ ] **Session 5**: Source API & Extensions (0%)
@@ -27,7 +27,7 @@ Track overall progress across all 12 sessions.
 
 ### Core Modules
 - [x] `desktop/` - Desktop application (Session 1)
-- [ ] `core/common` - Shared utilities (Session 2)
+- [x] `core/common` - Shared utilities (Session 2) ✅
 - [ ] `core/archive` - Archive handling (Session 2)
 - [ ] `domain/` - Business logic (Session 3)
 - [ ] `data/` - Data layer (Session 4)

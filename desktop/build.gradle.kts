@@ -56,13 +56,13 @@ dependencies {
     // DateTime
     implementation(desktopLibs.kotlinx.datetime)
 
-    // Project modules (will be added as they're converted to KMP)
-    // implementation(projects.core.common)
-    // implementation(projects.domain)
-    // implementation(projects.data)
-    // implementation(projects.sourceApi)
-    // implementation(projects.presentationCore)
-    // implementation(projects.i18n)
+    // Project modules (converted to KMP)
+    implementation(projects.core.common)
+    // implementation(projects.domain) // Session 3
+    // implementation(projects.data) // Session 4
+    // implementation(projects.sourceApi) // Session 5
+    // implementation(projects.presentationCore) // Session 7-8
+    implementation(projects.i18n)
 }
 
 kotlin {
