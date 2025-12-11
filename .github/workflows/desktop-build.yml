@@ -1,0 +1,188 @@
+name: Desktop Build CI
+
+on:
+  push:
+    branches: [ main, develop, desktop-port ]
+    paths:
+      - 'desktop/**'
+      - 'core/common/**'
+      - 'gradle/desktop.versions.toml'
+      - '.github/workflows/desktop-build.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'desktop/**'
+      - 'core/common/**'
+      - 'gradle/desktop.versions.toml'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'gradle'
+    
+    - name: Install VLC
+      run: |
+        choco install vlc -y
+    
+    - name: Grant execute permission for gradlew
+      run: |
+        git update-index --chmod=+x gradlew
+    
+    - name: Build Desktop Application
+      run: |
+        ./gradlew :desktop:build --stacktrace
+    
+    - name: Run Desktop Tests
+      run: |
+        ./gradlew :desktop:test
+    
+    - name: Create Distributable
+      run: |
+        ./gradlew :desktop:createDistributable
+    
+    # Only package MSI on main branch
+    - name: Package MSI Installer
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/desktop-port'
+      run: |
+        ./gradlew :desktop:packageMsi
+    
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: anikku-desktop-windows
+        path: |
+          desktop/build/compose/binaries/main/app/
+          desktop/build/compose/binaries/main/msi/*.msi
+        retention-days: 30
+    
+    - name: Upload Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results-windows
+        path: desktop/build/test-results/
+        retention-days: 7
+
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'gradle'
+    
+    - name: Install VLC
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y vlc libvlc-dev
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Build Desktop Application
+      run: |
+        ./gradlew :desktop:build --stacktrace
+    
+    - name: Run Desktop Tests
+      run: |
+        ./gradlew :desktop:test
+    
+    - name: Create Distributable
+      run: |
+        ./gradlew :desktop:createDistributable
+    
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: anikku-desktop-linux
+        path: desktop/build/compose/binaries/main/app/
+        retention-days: 30
+
+  build-macos:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'gradle'
+    
+    - name: Install VLC
+      run: |
+        brew install --cask vlc
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Build Desktop Application
+      run: |
+        ./gradlew :desktop:build --stacktrace
+    
+    - name: Run Desktop Tests
+      run: |
+        ./gradlew :desktop:test
+    
+    - name: Create Distributable
+      run: |
+        ./gradlew :desktop:createDistributable
+    
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: anikku-desktop-macos
+        path: desktop/build/compose/binaries/main/app/
+        retention-days: 30
+
+  verify-android-compatibility:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'gradle'
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    
+    - name: Verify Android App Still Builds
+      run: |
+        ./gradlew :app:assembleDebug --stacktrace
+    
+    - name: Comment on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '✅ Android build verified - desktop changes do not break Android app'
+          })

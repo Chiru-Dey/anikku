@@ -1,0 +1,32 @@
+# Build output
+/build/
+*.class
+
+# IDE
+/.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Gradle
+.gradle/
+gradle-app.setting
+
+# Compose Desktop
+/compose/
+
+# VLC
+*.log
+vlc-*.log
+
+# Local configuration
+local.properties
+
+# Packaging
+*.msi
+*.exe
+*.dmg
+*.deb
+*.rpm
+*.pkg

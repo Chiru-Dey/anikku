@@ -9,6 +9,8 @@
 ### Full-featured player, based on Aniyomi.
 Discover and watch anime, cartoons, series, and more – easier than ever on your Android device.
 
+> 🚧 **Windows Port in Development**: A desktop version for Windows (and Linux/macOS) is currently being developed using Compose Multiplatform. See [`desktop/`](./desktop/) for more information.
+
 | Releases | Preview |
 |----------|---------|
 | <div align="center"> [![GitHub downloads](https://img.shields.io/github/downloads/komikku-app/anikku/latest/total?label=Latest%20Downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/komikku-app/anikku/releases/latest) [![GitHub downloads](https://img.shields.io/github/downloads/komikku-app/anikku/total?label=Total%20Downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/komikku-app/anikku/releases) [![Stable build](https://img.shields.io/github/actions/workflow/status/komikku-app/anikku/build_release.yml?labelColor=27303D&label=Stable&labelColor=06599d&color=043b69)](https://github.com/komikku-app/anikku/actions/workflows/build_release.yml) | <div align="center"> [![GitHub downloads](https://img.shields.io/github/downloads/komikku-app/anikku-preview/latest/total?label=Latest%20Downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/komikku-app/anikku-preview/releases/latest) [![GitHub downloads](https://img.shields.io/github/downloads/komikku-app/anikku-preview/total?label=Total%20Downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/komikku-app/anikku-preview/releases) [![Preview build](https://img.shields.io/github/actions/workflow/status/komikku-app/anikku-preview/build_app.yml?labelColor=27303D&label=Preview&labelColor=2c2c47&color=1c1c39)](https://github.com/komikku-app/anikku-preview/actions/workflows/build_app.yml) |
@@ -20,10 +22,16 @@ Discover and watch anime, cartoons, series, and more – easier than ever on you
 
 ## Download
 
+### Android
+
 [![Stable](https://img.shields.io/github/release/komikku-app/anikku.svg?maxAge=3600&label=Stable&labelColor=06599d&color=043b69)](https://github.com/komikku-app/anikku/releases/latest)
 [![Preview](https://img.shields.io/github/v/release/komikku-app/anikku-preview.svg?maxAge=3600&label=Preview&labelColor=2c2c47&color=1c1c39)](https://github.com/komikku-app/anikku-preview/releases/latest)
 
 *Requires Android 8.0 or higher.*
+
+### Desktop (Windows/Linux/macOS)
+
+🚧 **In Development** - Windows port is currently in progress. See [desktop/README.md](./desktop/README.md) and [WINDOWS_PORT_MIGRATION_PLAN.md](./WINDOWS_PORT_MIGRATION_PLAN.md) for details.
 
 [![Sponsor me on GitHub](https://custom-icon-badges.demolab.com/badge/-Sponsor-ea4aaa?style=for-the-badge&logo=heart&logoColor=white)](https://github.com/sponsors/cuong-tran "Sponsor me on GitHub")
 

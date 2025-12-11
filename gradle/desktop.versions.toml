@@ -1,0 +1,113 @@
+[versions]
+# Compose Desktop
+compose-desktop = "1.6.0"
+compose-plugin = "1.6.0"
+
+# Video Player
+vlcj = "4.8.2"
+vlcj-natives = "4.8.0"
+
+# Native Access
+jna = "5.14.0"
+
+# Dependency Injection
+koin = "3.5.3"
+
+# HTTP Client (Desktop alternative to OkHttp)
+ktor = "2.3.8"
+
+# Database
+sqldelight = "2.0.1"
+
+# Image Loading
+coil3 = "3.0.0-alpha04"
+
+# Settings Storage
+multiplatform-settings = "1.1.1"
+
+# Logging
+kermit = "2.0.2"
+
+# File utilities
+commons-io = "2.15.1"
+
+# Windows Notifications
+jpowershell = "3.1.1"
+
+# Coroutines (ensure compatibility)
+coroutines = "1.7.3"
+
+# Serialization
+kotlinx-serialization = "1.6.2"
+
+# DateTime
+kotlinx-datetime = "0.5.0"
+
+[libraries]
+# Compose Desktop
+compose-desktop-runtime = { module = "org.jetbrains.compose.desktop:desktop-jvm", version.ref = "compose-desktop" }
+compose-desktop-common = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-desktop" }
+compose-material3-desktop = { module = "org.jetbrains.compose.material3:material3-desktop", version.ref = "compose-desktop" }
+
+# Video Player - VLCJ
+vlcj = { module = "uk.co.caprica:vlcj", version.ref = "vlcj" }
+vlcj-natives-windows = { module = "uk.co.caprica:vlcj-natives", version.ref = "vlcj-natives" }
+
+# JNA for native Windows API calls
+jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
+jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
+
+# Dependency Injection - Koin
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+
+# HTTP Client - Ktor
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+
+# Database - SQLDelight Desktop
+sqldelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+
+# Image Loading - Coil 3 (Multiplatform)
+coil3-core = { module = "io.coil-kt.coil3:coil-core", version.ref = "coil3" }
+coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
+coil3-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil3" }
+
+# Settings - Multiplatform Settings
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatform-settings" }
+multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatform-settings" }
+
+# Logging - Kermit
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+
+# File Utilities
+commons-io = { module = "commons-io:commons-io", version.ref = "commons-io" }
+
+# Windows Notifications
+jpowershell = { module = "com.profesorfalken:jPowerShell", version.ref = "jpowershell" }
+
+# Coroutines
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "coroutines" }
+
+# Serialization
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+# DateTime
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+[bundles]
+vlcj = ["vlcj", "vlcj-natives-windows"]
+jna = ["jna", "jna-platform"]
+koin = ["koin-core", "koin-compose"]
+ktor-client = ["ktor-client-core", "ktor-client-cio", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json", "ktor-client-logging"]
+coil3 = ["coil3-core", "coil3-compose", "coil3-network-ktor"]
+multiplatform-settings = ["multiplatform-settings", "multiplatform-settings-coroutines"]
+kotlinx-coroutines = ["kotlinx-coroutines-core", "kotlinx-coroutines-swing"]
+
+[plugins]
+compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }

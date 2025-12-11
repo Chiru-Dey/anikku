@@ -32,6 +32,9 @@ dependencyResolutionManagement {
         create("aniyomilibs") {
             from(files("gradle/aniyomi.versions.toml"))
         }
+        create("desktopLibs") {
+            from(files("gradle/desktop.versions.toml"))
+        }
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -66,3 +69,4 @@ include(":presentation-widget")
 include(":source-api")
 include(":source-local")
 include(":telemetry")
+include(":desktop")
